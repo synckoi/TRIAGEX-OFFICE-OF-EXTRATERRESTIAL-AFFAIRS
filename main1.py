@@ -21,25 +21,6 @@ def get_text(prompt):
         if temp != "":
             return temp
         print("[X] Answer cannot be empty. Please re-enter.")
-
-# Get a REAL number (eg; 1 or 21) from use, have input validation.
-def get_int(prompt):
-    while True:
-        temp = input(f"{prompt} \n").strip()
-        try:
-            temp = int(temp)
-            return temp
-        except:
-            print("[X] Invalid format, please only input an integer.")
-
-def ask_yesno(prompt):
-    while True:
-        temp = input(f"{prompt}\n").strip().upper()
-        if temp in ['Y', 'YES']:
-            return True
-        elif temp in ['N', 'NO']:
-            return False
-        print("[X] Only use Y or N for your answer.")
     
 # Get the user choice (in integer)
 def get_choicenum(prompt, lowbound, highbound):
@@ -162,24 +143,21 @@ def response_menu(entity):
     choose_response(entity)
     send_team(entity)
 
-# MAIN
-def main():
-    header("TRIAGEX", "OFFICE OF EXTRATERRESTIAL AFFAIRS")
-    running = True
-    while running:
-        print_header("MAIN MENU")
-        print(" [1] Detect a new arrival")
-        print(" [0] Exit")
-        choice = get_choicenum(" Enter your choice: ", 0, 1)
 
-        if choice == 1:
-            entity = detection_menu()
-            classify_menu(entity)
-            response_menu(entity)
-            show_summary(entity)
-            pause()
-        elif choice == 0:
-            print_header("Session terminated. Goodbye.")
-            exit()
+header("TRIAGEX", "OFFICE OF EXTRATERRESTIAL AFFAIRS")
+running = True
+while running:
+    print_header("MAIN MENU")
+    print(" [1] Detect a new arrival")
+    print(" [0] Exit")
+    choice = get_choicenum(" Enter your choice: ", 0, 1)
 
-main()
+    if choice == 1:
+        entity = detection_menu()
+        classify_menu(entity)
+        response_menu(entity)
+        show_summary(entity)
+        pause()
+    elif choice == 0:
+        print_header("Session terminated. Goodbye.")
+        exit()
