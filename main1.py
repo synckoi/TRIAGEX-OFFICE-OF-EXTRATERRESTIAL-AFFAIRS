@@ -96,6 +96,10 @@ def header(title, subtitle=None, width=50):
         print("║" + subtitle.center(inner) + "║")
     print("╚" + "═" * inner + "╝")
 
+"""
+PROCESS FUNCTIONS
+"""
+
 # DETECTION FUNCTIONS
 def detection_menu():
     print_header("MANUAL ENTRY")
@@ -110,10 +114,6 @@ def detection_menu():
         entity["traits"] = traits
 
     return entity
-
-"""
-PROCESS FUNCTIONS
-"""
 
 # CLASSIFY FUNCTIONS
 def classify_menu(entity):
