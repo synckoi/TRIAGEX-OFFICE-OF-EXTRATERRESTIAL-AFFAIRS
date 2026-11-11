@@ -12,7 +12,7 @@ CLASSIFICATIONS = ("Harmless", "Low risk", "Dangerous", "Extreme threat")
 RESPONSE_TYPES = ("Tolerate", "Observe", "Negotiate", "Contain", "Expel", "Terminate")
 
 """
-PROCESS FUNCTIONS 
+HELPERS FUNCTIONS 
 """
 # Get an answer from user input, will re-prompt if answer is empty.
 def get_text(prompt):
@@ -111,6 +111,10 @@ def detection_menu():
 
     return entity
 
+"""
+PROCESS FUNCTIONS
+"""
+
 # CLASSIFY FUNCTIONS
 def classify_menu(entity):
     print_header("CLASSIFICATION OF ENTITY")
@@ -120,12 +124,14 @@ def classify_menu(entity):
     entity["reason"] = get_text("Why did you choose this classification?")
 
 # RESPONSE FUNCTIONS
-def choose_response(entity):
+def response_menu(entity):
+    print_header("RESPONSE COMMAND")
+    print("Response for", entity["codename"], ":")
     print("\n Choose a response strategy:")
+
     entity["response_type"] = choose_from_list(RESPONSE_TYPES)
     entity["response"] = get_text("Describe your plan in detail:")
 
-def send_team(entity):
     if entity["classification"] == "Harmless":
         personnel = 5
     elif entity["classification"] == "Low risk":
@@ -135,14 +141,12 @@ def send_team(entity):
     elif entity["classification"] == "Extreme threat":
         personnel = 50
     print("\nUnder your current provision, you have", personnel, "OEA personnel allocated for this entity.")
+
     entity["personnel"] = get_choicenum(" How many will you send? ", 0, personnel)
 
-def response_menu(entity):
-    print_header("RESPONSE COMMAND")
-    print("Response for", entity["codename"], ":")
-    choose_response(entity)
-    send_team(entity)
-
+"""
+MAIN
+"""
 
 header("TRIAGEX", "OFFICE OF EXTRATERRESTIAL AFFAIRS")
 running = True
